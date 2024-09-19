@@ -1,21 +1,27 @@
 #include <stdio.h>
 
 int findClosestNumber(int* nums, int numSize) {
-    int closestToZero[numSize];
-    int lenNow = 0;
-    int distanceFromZero;
-    int distanceNow;
-    for (int i = 0; i < numSize; i++) {
-        if (nums[i] == 0) {
-            return nums[i];
+    signed int distanceFromZero;
+    signed int numNow = nums[0];
+    if (numNow < 0) {
+        distanceFromZero = numNow * -1;
+    } else {
+        distanceFromZero = numNow;
+    }
+    for (int i = 1; i < numSize; i++) {
+        if (nums[i] == 0 || numNow == 0) {
+            return 0;
         }
-        if (nums[i] < 0) {
-            distanceNow = nums[i] * -1;
-            if (distanceNow < distanceFromZero) {
-                distanceFromZero = distanceNow;
+        if (numNow < 0) {
+            if (nums[i] > 0 && distanceFromZero > nums[i]) {
+                distanceFromZero = nums[i];
+                numNow = nums[i];
+            } else if (nums[i] < 0 && nums[i] > numNow && distanceFromZero > nums[i] * -1) {
+                distanceFromZero = nums[i] * -1;
+                numNow = nums[i];
             }
-        } else if (nums[i] > 0) {
-
+        } else if (numNow > 0) {
+            
         }
     }
 }
